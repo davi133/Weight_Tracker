@@ -2,7 +2,7 @@
 import React from 'react';
 
 import WeightCard from './WeighCard';
-import WeighCardCreator from "./WeightCardCreateor"
+import WeighCardCreator from "./WeightCardCreator"
 
 import WeightReg from './model/WeightReg';
 
