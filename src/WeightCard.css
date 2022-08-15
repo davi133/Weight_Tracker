@@ -1,0 +1,82 @@
+.weightCard
+{
+    font-size: 20px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: max-content;
+    transition: 200ms;
+}
+.weightCard:hover
+{
+    box-shadow: 2px 2px 3px rgb(157, 157, 157);
+}
+.weightDisplay
+{
+    border-right: 1px solid rgb(194, 193, 193);
+    
+    margin: auto 0;
+    width: 10ch;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.dateDisplay
+{
+    border-right: 1px solid rgb(194, 193, 193);
+    margin: auto 0;
+    width: 10ch;
+    
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.cardOptionsBtn
+{
+    
+    height: 30px;
+    width: 30px;
+    margin: 10px 10px;
+    border-radius: 15px;
+    transition: 200ms;
+    cursor: pointer;
+    z-index: -10;
+}
+.cardOptionsBtn:hover
+{
+    filter: brightness(90%);
+    box-shadow: 2px 2px 3px rgb(157, 157, 157);
+    
+}
+
+.dropdown
+{
+    position: relative;
+}
+
+
+
+.OptionsMenu
+{
+    position: absolute;
+    left: 80%;
+    top: 25%;
+    background-color: white;
+    z-index: 10;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgb(157, 157, 157);
+
+}
+
+.aOption{
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.aOption:hover{
+    background-color: rgb(215, 215, 215);
+}
+.delOption:hover{
+    background-color:rgb(255, 177, 177);
+}

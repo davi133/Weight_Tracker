@@ -1,9 +1,18 @@
 
+import React from 'react';
+
+import WeightCard from './WeighCard';
+
+import WeightReg from './model/WeightReg';
+
 
 
 function App() {
   return (
-    <div>olá :)</div>
+    <>
+      <WeightCard info={WeightReg(50, "HOJE")} />
+      
+    </>
   );
 }
 
