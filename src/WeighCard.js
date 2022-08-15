@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./WeightCard.css";
 import icon_edit from "./icon_more_options1.png"
 
 export default function WeightCard(props) {
     const [dropDown, setDropDown] = useState(false);
 
-    useEffect(() => { console.log("render(" + props.info.date + ")") })
+  
 
     return (
         <div className="weightCard">
-            <div className="weightDisplay">
+            <div className=" infoDisplay">
                 {props.info.weight} Kg
             </div>
-            <div className="dateDisplay">
+            <div className="infoDisplay">
                 {props.info.date}
             </div>
 
@@ -25,11 +25,11 @@ export default function WeightCard(props) {
                     style={{ display: !dropDown ? "none" : "block" }}       >
                     <div className="aOption" 
                     onClick={()=>{console.log("editar")}}>
-                        editar
+                        EDITAR
                     </div>
                     <div className="aOption delOption"
                     onClick={()=>{console.log("excluir")}}>
-                        excluir
+                        EXCLUIR
                     </div>
                 </div>
 

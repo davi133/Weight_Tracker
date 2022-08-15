@@ -8,7 +8,7 @@ import WeightReg from './model/WeightReg';
 
 
 
-let a = WeightReg(50,new Date());
+//let a = WeightReg(50,new Date());
 
 
 
@@ -17,7 +17,8 @@ function App() {
     <>
       <WeightCard info={WeightReg(50,"hoje")} />
       <hr></hr><hr></hr>
-      
+      <WeighCardCreator/>
+
 
     </>
   );
