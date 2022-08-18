@@ -7,21 +7,26 @@
     flex-direction: row;
     justify-content: center;
     width: max-content;
-    transition: 200ms;
+    transition: 100ms;
     height: 55px;
+    box-shadow: 1px 1px 2px rgb(157, 157, 157);
 }
 .weightCard:hover
 {
-    box-shadow: 2px 2px 3px rgb(157, 157, 157);
+    box-shadow: 3px 3px 3px rgb(157, 157, 157);
 }
 
 .infoDisplay
 {
+    display: flex;
     border-right: 1px solid rgb(194, 193, 193);
     margin: auto 0;
     width: 112px;
     padding: 5px 10px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    height:auto;
 }
 
 .cardOptionsBtn
@@ -101,3 +106,38 @@
     outline: none;
   
 }
+.btnDisplay
+{
+    border: none;
+    width: 80%;
+    height:30px;
+    color: whitesmoke;
+}
+
+
+.btnSave
+{
+    background-color: hsl(124, 100%, 35%);
+}
+.btnSave:hover
+{
+    background-color: hsl(124, 90%, 43%);
+}
+.btnSave:active
+{
+    background-color: hsl(124, 90%, 47%);
+}
+
+.btnDelete
+{
+    background-color: hsl(0, 100%, 50%);
+}
+.btnDelete:hover
+{
+    background-color: hsl(0, 100%, 60%);
+}
+.btnDelete:active
+{
+    background-color: hsl(0, 100%, 70%);
+}
+

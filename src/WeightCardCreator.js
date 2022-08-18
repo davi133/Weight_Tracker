@@ -36,10 +36,10 @@ export default function WeighCardCreator(props) {
             </div>
 
             <div className="infoDisplay">
-                <button>SALVAR</button>
-            </div>
+                <button className="btnDisplay btnSave">SALVAR</button>
+            </div> 
             <div className="infoDisplay">
-                <button>APAGAR</button>
+                <button className="btnDisplay btnDelete">APAGAR</button>
             </div>
 
 
