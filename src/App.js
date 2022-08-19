@@ -1,26 +1,20 @@
 
 import React from 'react';
 
-import WeightCard from './WeighCard';
-import WeighCardCreator from "./WeightCardCreator"
-
-import WeightReg from './model/WeightReg';
-
-
-
-//let a = WeightReg(50,new Date());
+import HomePage from './HomePage/HomePage';
+import WeightCard from "./Cards/WeighCard"
 
 
 
 function App() {
   return (
-    <>
-      <WeightCard info={WeightReg(50,"hoje")} />
-      <hr></hr><hr></hr>
-      <WeighCardCreator/>
+    <div style={{height:"100%"}}>
+    
+      <HomePage/>
+      <WeightCard/>
 
-
-    </>
+    </div>
+    
   );
 }
 

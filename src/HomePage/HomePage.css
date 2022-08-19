@@ -1,0 +1,27 @@
+.pseudoBody
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.profilesPlate
+{
+    background-color: rgb(182, 182, 182);
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.profileCardBody
+{
+    background-color:cyan;
+    width: 100px; 
+    height:120px; 
+    margin: 10px; 
+
+    
+}

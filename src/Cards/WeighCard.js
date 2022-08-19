@@ -10,10 +10,10 @@ export default function WeightCard(props) {
     return (
         <div className="weightCard">
             <div className=" infoDisplay">
-                {props.info.weight} Kg
+                {props.info?.weight} Kg
             </div>
             <div className="infoDisplay">
-                {props.info.date}
+                {props.info?.date}
             </div>
 
             <div className="dropdown" onMouseLeave={()=>{setDropDown(false)}} >
