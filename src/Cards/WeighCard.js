@@ -1,6 +1,10 @@
 import { useState } from "react";
 import "./WeightCard.css";
 import icon_edit from "./icon_more_options1.png"
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import 'font-awesome/css/font-awesome.min.css';
+
 
 export default function WeightCard(props) {
     const [dropDown, setDropDown] = useState(false);
@@ -18,8 +22,10 @@ export default function WeightCard(props) {
 
             <div className="dropdown" onMouseLeave={()=>{setDropDown(false)}} >
 
-                <img className="cardOptionsBtn" src={icon_edit} alt=""
-                onClick={()=>{setDropDown(true)}}></img>
+                {/*<img className="cardOptionsBtn" src={icon_edit} alt=""
+                onClick={()=>{setDropDown(true)}}></img>*/}
+                <FontAwesomeIcon icon={faPencil} className="cardOptionsBtn" size="lg"
+                onClick={()=>{setDropDown(true)}}/>
 
                 <div className="OptionsMenu"
                     style={{ display: !dropDown ? "none" : "block" }}       >
