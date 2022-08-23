@@ -11,7 +11,6 @@ function App() {
     <div style={{height:"100%"}}>
     
       <HomePage/>
-      <WeightCard/>
 
     </div>
     

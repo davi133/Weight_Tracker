@@ -3,7 +3,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 93vh;
+    width: 100%;
+    overflow: hidden;
 }
 
 .profilesPlate
@@ -14,6 +16,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .profileCardBody
@@ -22,6 +25,46 @@
     width: 100px; 
     height:120px; 
     margin: 10px; 
-
     
+    
+    
+}
+.profileCardBody:hover
+{
+    outline: 1px solid rgb(0, 255, 187);
+    
+}
+
+.NewProfileComponent
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    outline: 1px auto blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screenBlocker
+{
+    margin: auto;
+    outline: 1px auto red;
+    width: 100%;
+    height:100%;
+    opacity: 50%;
+    background-color: bisque;
+}
+
+.newProfileFormBody
+{
+    position:absolute;
+    margin: auto;
+    width: 400px;
+    height: 450px;
+    background-color: rgb(225, 225, 225);
+    z-index: 100;
+    box-shadow: 2px 2px 0px rgb(217, 255, 47);
+
+    display: flex;
 }
