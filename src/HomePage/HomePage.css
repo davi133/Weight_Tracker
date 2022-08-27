@@ -35,30 +35,10 @@
     
 }
 
-.NewProfileComponent
-{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    outline: 1px auto blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.screenBlocker
-{
-    margin: auto;
-    outline: 1px auto red;
-    width: 100%;
-    height:100%;
-    opacity: 50%;
-    background-color: bisque;
-}
 
 .newProfileFormBody
 {
-    position:absolute;
     margin: auto;
     width: 380px;
     height: auto;

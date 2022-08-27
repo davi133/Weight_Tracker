@@ -30,7 +30,9 @@ export function saveProfile(profile)
 {
     var lista = retrieveAllAccounts();
     lista = {...lista, [profile.email]: profile}
-    localStorage.setItem("WT_profiles",JSON.stringify(lista))
+    localStorage.setItem("WT_profiles",JSON.stringify(lista));
+
+    /*localStorage.setItem(profile.email,JSON.stringify(profile))*/
 }
 
 export function removeAllAccounts()

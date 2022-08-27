@@ -4,6 +4,9 @@ import newPrpfileIcon from "./NewProfile.png"
 import NewProfileForm from "./NewProfileForm";
 import { useState } from "react";
 
+import BackgroundBlocker from "../BackgroundBlocker";
+import GenericWindow from "../GenericWindow";
+
 export default function HomePage() {
     const [isFormOpen,setIsFormOpen] = useState(false);
     
@@ -17,14 +20,13 @@ export default function HomePage() {
                     <ProfileCard />
                     <ProfileCard />
                     <NewProfile onClick={()=>{setIsFormOpen(true)}}/>
-
-
-
                 </div>
-                <NewProfileForm style={{ display: !isFormOpen ? "none" : "flex"}}
+                <NewProfileForm On={isFormOpen}
                 onCancel = {()=>{setIsFormOpen(false)}}
-                
                 />
+
+
+
 
             </div>
         </>
