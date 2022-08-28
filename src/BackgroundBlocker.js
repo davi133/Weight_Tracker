@@ -8,10 +8,10 @@ export default function BackgroundBlocker(props)
     }
 
     return (
-        <div className="backGroundBlockerCapsule"  onClick={props.onClick} 
+        <div className="backGroundBlockerCapsule"   
         style={ { ...props.style, display: _On ? "flex" : "none"} }>
 
-            <div className="backGroundBlocker"/>
+            <div className="backGroundBlocker" onClick={props.onClick}/>
             <div style = {{position:"absolute"}}>
             {props.children}
             </div>
