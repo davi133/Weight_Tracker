@@ -1,8 +1,10 @@
 
-export default function ProfileCard()
+export default function ProfileCard(props)
 {
+    const {...other} = props;
+
     return (
-        <div className="profileCardBody">
+        <div className="profileCardBody" {...other}>
             a
         </div>
 

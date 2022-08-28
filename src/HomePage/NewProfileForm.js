@@ -36,7 +36,7 @@ export default function NewProfileForm(props) {
         <div className="genericWindow" onClick={props.onFormClick} style={props.style}>
             <h2>Criar novo Perfil</h2>
 
-            <form className="the_form" onSubmit={handleSubmit}>
+            <form className="genericForm" onSubmit={handleSubmit}>
                 <label>Name:
                     <br></br>
                     <input type="text" value={inputs.name || ""} name="name" onChange={handleChange} required />

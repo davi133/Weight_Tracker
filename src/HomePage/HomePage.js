@@ -2,11 +2,14 @@ import "./HomePage.css";
 import ProfileCard from "./ProfileCard";
 import newPrpfileIcon from "./NewProfile.png"
 import NewProfileForm from "./NewProfileForm";
+import ProfileLogIn from "./ProfileLogIn";
 import { useState } from "react";
 
 
 export default function HomePage() {
-    const [isFormOpen,setIsFormOpen] = useState(false);
+    const [isSignInOpen,setIsSignInOpen] = useState(false);
+    const [isLoginOpen,setIsLoginOpen] = useState(false);
+    
     
     return (
         <>
@@ -14,15 +17,20 @@ export default function HomePage() {
                 
                 <div className="profilesPlate">
 
+                    <ProfileCard onClick={()=>{setIsLoginOpen(true)}}/>
                     <ProfileCard />
                     <ProfileCard />
-                    <ProfileCard />
-                    <NewProfile onClick={()=>{setIsFormOpen(true)}}/>
+                    <NewProfile onClick={()=>{setIsSignInOpen(true)}}/>
                 </div>
                 
-                <NewProfileForm On={isFormOpen}
-                onCancel = {()=>{setIsFormOpen(false)}}
+                <NewProfileForm On={isSignInOpen}
+                onCancel = {()=>{setIsSignInOpen(false)}}
                 />
+
+                <ProfileLogIn On={isLoginOpen}
+                onCancel = {()=>{setIsSignInOpen(false)}}
+                />
+                
 
 
 

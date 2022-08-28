@@ -39,7 +39,7 @@
 
 
 
-.the_form
+.genericForm
 {
     display: flex;
     flex-direction: column;
@@ -48,13 +48,13 @@
 
 }
 
-.the_form > *
+.genericForm > *
 {
     margin-top: 20px;
 
 }
 
-.the_form input[type="submit"]
+.genericForm input[type="submit"]
 {
     width: 70px;
     margin-right: 15px;
