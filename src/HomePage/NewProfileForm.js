@@ -29,13 +29,11 @@ export default function NewProfileForm(props) {
 
     }
 
-
-
     return (
         <BackgroundBlocker On = {props.On} onClick={() => { props.onCancel(); setInputs({}) }} >
 
 
-        <div className="newProfileFormBody" onClick={props.onFormClick} style={props.style}>
+        <div className="genericWindow" onClick={props.onFormClick} style={props.style}>
             <h2>Criar novo Perfil</h2>
 
             <form className="the_form" onSubmit={handleSubmit}>

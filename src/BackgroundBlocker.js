@@ -6,6 +6,11 @@ export default function BackgroundBlocker(props)
     {
         _On = false
     }
+    if (props.onClick === undefined)
+    {
+        console.warn("the onClick event from Background Blocker is undefined,"+
+        " it is recommended to pass an event to close the background blocker")
+    }
 
     return (
         <div className="backGroundBlockerCapsule"   
