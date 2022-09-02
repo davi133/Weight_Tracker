@@ -10,6 +10,10 @@ export default function HomePage() {
     const [isSignInOpen,setIsSignInOpen] = useState(false);
     const [isLoginOpen,setIsLoginOpen] = useState(false);
     
+    const handleLogIn = (email)=>
+    {
+        console.log("thanks for login in, "+email)
+    }
     
     return (
         <>
@@ -24,11 +28,13 @@ export default function HomePage() {
                 </div>
                 
                 <NewProfileForm Trigger={isSignInOpen}
-                onCancel = {()=>{setIsSignInOpen(false)}}
+                onCancel = {()=>{setIsSignInOpen(false)}
+                }
                 />
 
                 <ProfileLogIn Trigger={isLoginOpen}
-                onCancel = {()=>{setIsSignInOpen(false)}}
+                onCancel = {()=>{setIsLoginOpen(false)}}
+                onLogIn = {handleLogIn}
                 />
                 
 
