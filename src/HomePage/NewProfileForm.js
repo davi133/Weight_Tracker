@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Profile, { saveProfile, retrieveAccount } from "../model/Profiles";
-import BackgroundBlocker from "../BackgroundBlocker";
+import PopUpElement from "../PopUpElement";
 
 export default function NewProfileForm(props) {
 
@@ -30,7 +30,7 @@ export default function NewProfileForm(props) {
     }
 
     return (
-        <BackgroundBlocker On = {props.On} onClick={() => { props.onCancel(); setInputs({}) }} >
+        <PopUpElement Trigger = {props.Trigger} onClick={() => { props.onCancel(); setInputs({}) }} >
 
 
         <div className="genericWindow" onClick={props.onFormClick} style={props.style}>
@@ -64,7 +64,7 @@ export default function NewProfileForm(props) {
 
             </form>
         </div>
-        </BackgroundBlocker>
+        </PopUpElement>
 
 
 

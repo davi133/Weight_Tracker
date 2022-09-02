@@ -1,11 +1,11 @@
-import BackgroundBlocker from "../BackgroundBlocker";
+import PopUpElement from "../PopUpElement";
 
 export default function ProfileLogIn(props) {
 
 
 
     return (
-        <BackgroundBlocker On={props.On} onClick={props.onCancel}>
+        <PopUpElement Trigger={props.Trigger} onClick={props.onCancel}>
 
             <div className="genericWindow" style={props.style}>
 
@@ -29,7 +29,7 @@ export default function ProfileLogIn(props) {
 
 
 
-        </BackgroundBlocker>
+        </PopUpElement>
 
 
     );

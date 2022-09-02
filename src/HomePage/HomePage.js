@@ -23,11 +23,11 @@ export default function HomePage() {
                     <NewProfile onClick={()=>{setIsSignInOpen(true)}}/>
                 </div>
                 
-                <NewProfileForm On={isSignInOpen}
+                <NewProfileForm Trigger={isSignInOpen}
                 onCancel = {()=>{setIsSignInOpen(false)}}
                 />
 
-                <ProfileLogIn On={isLoginOpen}
+                <ProfileLogIn Trigger={isLoginOpen}
                 onCancel = {()=>{setIsSignInOpen(false)}}
                 />
                 
