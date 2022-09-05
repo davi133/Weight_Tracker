@@ -35,10 +35,6 @@
     
 }
 
-
-
-
-
 .genericForm
 {
     display: flex;
@@ -58,4 +54,19 @@
 {
     width: 70px;
     margin-right: 15px;
+}
+
+.choiceWindow
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly
+    
+}
+
+.choiceWindow > button
+{
+    margin: 20px;
+    width: max-content;
 }

@@ -3,12 +3,14 @@ import ProfileCard from "./ProfileCard";
 import newPrpfileIcon from "./NewProfile.png"
 import NewProfileForm from "./NewProfileForm";
 import ProfileLogIn from "./ProfileLogIn";
+import AddProfile from "./AddProfile";
 import { useState } from "react";
 
 
 export default function HomePage() {
     const [isSignInOpen,setIsSignInOpen] = useState(false);
     const [isLoginOpen,setIsLoginOpen] = useState(false);
+    const [isAddProfile,setIsAddProfile] = useState(false);
     
     const handleLogIn = (email)=>
     {
@@ -22,7 +24,7 @@ export default function HomePage() {
                 <div className="profilesPlate">
 
                     <ProfileCard onClick={()=>{setIsLoginOpen(true)}}/>
-                    <ProfileCard />
+                    <ProfileCard onClick={()=>{setIsAddProfile(true)}}/>
                     <ProfileCard />
                     <NewProfile onClick={()=>{setIsSignInOpen(true)}}/>
                 </div>
@@ -37,6 +39,9 @@ export default function HomePage() {
                 onLogIn = {handleLogIn}
                 />
                 
+                <AddProfile  Trigger={isAddProfile}
+                onCancel = {()=>{setIsAddProfile(false)}}
+                />
 
 
 

@@ -28,7 +28,7 @@ export default function ProfileLogIn(props) {
 
 
     return (
-        <PopUpElement Trigger={props.Trigger} onClick={props.onCancel}>
+        <PopUpElement Trigger={props.Trigger} onClick={onClose}>
 
             <div className="genericWindow" style={props.style}>
 
@@ -50,7 +50,7 @@ export default function ProfileLogIn(props) {
 
                     <div>
                         <input type="submit" value="Entrar" />
-                        <input type="button" value="Fechar" onClick={() => { props.onCancel(); setInputs({}) }}/>
+                        <input type="button" value="Fechar" onClick={onClose}/>
                     </div>
                 </form>
 

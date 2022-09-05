@@ -29,8 +29,15 @@ export default function NewProfileForm(props) {
 
     }
 
+
+    const onClose = ()=>
+    {
+        props.onCancel();
+        setInputs({}) 
+    }
+
     return (
-        <PopUpElement Trigger = {props.Trigger} onClick={() => { props.onCancel(); setInputs({}) }} >
+        <PopUpElement Trigger = {props.Trigger} onClick={onClose} >
 
 
         <div className="genericWindow" onClick={props.onFormClick} style={props.style}>
@@ -59,7 +66,7 @@ export default function NewProfileForm(props) {
 
                 <div>
                     <input type="submit" value="Cadastrar" />
-                    <input type="button" value="Fechar" onClick={() => { props.onCancel(); setInputs({}) }} />
+                    <input type="button" value="Fechar" onClick={onClose} />
                 </div>
 
             </form>
