@@ -2,7 +2,8 @@ import PopUpElement from "../PopUpElement";
 import { useState } from "react";
 
 export default function ProfileLogIn(props) {
-    const [inputs, setInputs] = useState({});
+    var withEmail =  props.email!==undefined && props.email.length!==0;
+    const [inputs, setInputs] = useState({email: withEmail?props.email:""});
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -12,7 +13,6 @@ export default function ProfileLogIn(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
         props.onLogIn(inputs.email);
 
 
@@ -23,8 +23,13 @@ export default function ProfileLogIn(props) {
     const onClose = ()=>
     {
         props.onCancel();
-        setInputs({}) 
+        withEmail?setInputs({email:props.email}):setInputs({});
     }
+
+    console.log(withEmail);
+    console.log(inputs);
+    console.log(props.email)
+
 
 
     return (
@@ -36,10 +41,13 @@ export default function ProfileLogIn(props) {
                 <form className="genericForm" onSubmit={handleSubmit}>
                     <label>Email:
                         <br></br>
-                        <input type="email"  name="email" value={inputs.email || ""}
+                        <input type="email"  name="email" value={            
+                            inputs.email || ""}
                         onChange={handleChange} 
-                        placeholder="exemplo@email.com" required />
+                        placeholder="exemplo@email.com" required disabled={withEmail} />
                     </label>
+
+
 
                     <label>Senha:
                         <br></br>
