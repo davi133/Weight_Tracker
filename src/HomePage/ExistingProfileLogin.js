@@ -1,5 +1,7 @@
-import PopUpElement from "../PopUpElement";
+
 import { useState } from "react";
+import "../model/Profiles";
+import Profile from "../model/Profiles";
 
 export default function ProfileLogIn(props) {
     var withEmail =  props.email!==undefined && props.email.length!==0;
@@ -13,10 +15,9 @@ export default function ProfileLogIn(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.onLogIn(inputs.email);
+        
+        props.onLogIn(new Profile('a',inputs.email,inputs.password)) && onClose();
 
-
-        onClose();
 
     }   
 
@@ -26,15 +27,13 @@ export default function ProfileLogIn(props) {
         withEmail?setInputs({email:props.email}):setInputs({});
     }
 
-    console.log(withEmail);
-    console.log(inputs);
-    console.log(props.email)
+    //console.log(withEmail);
+    //console.log(inputs);
+    //console.log(props.email)
 
 
 
     return (
-        <PopUpElement Trigger={props.Trigger} onClick={onClose}>
-
             <div className="genericWindow" style={props.style}>
 
 
@@ -61,16 +60,7 @@ export default function ProfileLogIn(props) {
                         <input type="button" value="Fechar" onClick={onClose}/>
                     </div>
                 </form>
-
-
-
             </div>
-
-
-
-        </PopUpElement>
-
-
     );
 
 }

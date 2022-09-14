@@ -1,3 +1,5 @@
+
+
 export default function Profile(name, email="sem email", senha="12345")
 {
     var newProfile=
@@ -23,7 +25,6 @@ export function retrieveAccount(email)
 {
     var lista = retrieveAllAccounts();
     return lista[email];
-
 }
 
 export function saveProfile(profile)
@@ -31,7 +32,7 @@ export function saveProfile(profile)
     var lista = retrieveAllAccounts();
     lista = {...lista, [profile.email]: profile}
     localStorage.setItem("WT_profiles",JSON.stringify(lista));
-
+    console.log("profile ["+profile.email+"] saved")
     /*localStorage.setItem(profile.email,JSON.stringify(profile))*/
 }
 
