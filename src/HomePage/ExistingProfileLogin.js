@@ -31,8 +31,6 @@ export default function ProfileLogIn(props) {
     //console.log(inputs);
     //console.log(props.email)
 
-
-
     return (
             <div className="genericWindow" style={props.style}>
 
