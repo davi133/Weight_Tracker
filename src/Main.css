@@ -46,3 +46,12 @@
     padding: 20px;
 
 }
+
+
+.warningBox
+{
+    border: 1px solid red;
+    border-radius: 2px;
+    background-color: rgb(252, 150, 150);
+    padding: 2px;
+}
