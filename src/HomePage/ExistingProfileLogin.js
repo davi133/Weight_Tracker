@@ -1,11 +1,11 @@
 
 import { useState } from "react";
-import "../model/Profiles";
-import Profile from "../model/Profiles";
+import Profile,{retrieveAccount} from "../model/Profiles"
 
 export default function ProfileLogIn(props) {
     var withEmail =  props.email!==undefined && props.email.length!==0;
     const [inputs, setInputs] = useState({email: withEmail?props.email:""});
+    const [warningMsg,setWarningMsg] = useState("");
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -16,7 +16,29 @@ export default function ProfileLogIn(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        props.onLogIn(new Profile('a',inputs.email,inputs.password)) && onClose();
+        //props.onLogIn(new Profile('a',inputs.email,inputs.password)) && onClose();
+
+        let profile = new Profile('a',inputs.email,inputs.password);
+
+        let account = retrieveAccount(profile.email);
+        if (!account)
+        {
+            setWarningMsg("Essa conta não existe")
+            return false;
+        }
+        if (account.senha === profile.senha)
+        {
+            setWarningMsg("thanks for login in, " + profile.email)
+            onClose();
+            return true;
+        }
+        else
+        {
+            setWarningMsg("senha incorreta");
+            return false;
+        }
+
+
 
 
     }   
@@ -24,7 +46,8 @@ export default function ProfileLogIn(props) {
     const onClose = ()=>
     {
         props.onCancel();
-        withEmail?setInputs({email:props.email}):setInputs({});
+        //in case you decide it should do something more on close
+        
     }
 
     //console.log(withEmail);
@@ -33,8 +56,6 @@ export default function ProfileLogIn(props) {
 
     return (
             <div className="genericWindow" style={props.style}>
-
-
                 <form className="genericForm" onSubmit={handleSubmit}>
                     <label>Email:
                         <br></br>
@@ -44,8 +65,6 @@ export default function ProfileLogIn(props) {
                         placeholder="exemplo@email.com" required disabled={withEmail} />
                     </label>
 
-
-
                     <label>Senha:
                         <br></br>
                         <input type="password"  name="password"  value={inputs.password || ""}
@@ -53,6 +72,14 @@ export default function ProfileLogIn(props) {
                         required />
                     </label>
 
+                    {warningMsg !=="" &&
+                        <div className="warningBox">
+                            {warningMsg}
+                        </div>
+                    }
+
+                   
+                    
                     <div>
                         <input type="submit" value="Entrar" />
                         <input type="button" value="Fechar" onClick={onClose}/>
