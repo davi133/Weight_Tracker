@@ -15,11 +15,8 @@ export default function ProfileLogIn(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
-        //props.onLogIn(new Profile('a',inputs.email,inputs.password)) && onClose();
 
         let profile = new Profile('a',inputs.email,inputs.password);
-
         let account = retrieveAccount(profile.email);
         if (!account)
         {
@@ -56,6 +53,10 @@ export default function ProfileLogIn(props) {
 
     return (
             <div className="genericWindow" style={props.style}>
+                <h2>
+                    Fazer login
+                </h2>
+
                 <form className="genericForm" onSubmit={handleSubmit}>
                     <label>Email:
                         <br></br>

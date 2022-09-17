@@ -3,8 +3,8 @@ import Profile, { saveProfile, retrieveAccount } from "../model/Profiles";
 import PopUpElement from "../PopUpElement";
 
 export default function NewProfileForm(props) {
-
     const [inputs, setInputs] = useState({});
+    const [warningMsg,setWarningMsg] = useState("");
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -16,14 +16,15 @@ export default function NewProfileForm(props) {
         event.preventDefault();
 
         if (inputs.senha !== inputs.senha2) {
-            alert("confirme sua senha");
+            setWarningMsg("confirme sua senha");
         }
         else if (retrieveAccount(inputs.email)) {
-            alert("já existe uma conta com esse email");
+            setWarningMsg("já existe uma conta com esse email");
         }
         else {
             saveProfile(new Profile(inputs.name, inputs.email, inputs.senha));
-            alert("conta criada");
+            setWarningMsg("conta criada");
+            onClose();
         }
 
 
@@ -33,13 +34,10 @@ export default function NewProfileForm(props) {
     const onClose = ()=>
     {
         props.onCancel();
-        setInputs({}) 
+         //in case you decide it should do something more on close
     }
 
     return (
-        <PopUpElement Trigger = {props.Trigger} onClick={onClose} >
-
-
         <div className="genericWindow" onClick={props.onFormClick} style={props.style}>
             <h2>Criar novo Perfil</h2>
 
@@ -63,6 +61,12 @@ export default function NewProfileForm(props) {
                     <input type="password" value={inputs.senha2 || ""} name="senha2" onChange={handleChange} required />
                 </label>
 
+                {warningMsg !=="" &&
+                        <div className="warningBox">
+                            {warningMsg}
+                        </div>
+                }
+
 
                 <div>
                     <input type="submit" value="Cadastrar" />
@@ -71,11 +75,6 @@ export default function NewProfileForm(props) {
 
             </form>
         </div>
-        </PopUpElement>
-
-
-
-
     );
 
 

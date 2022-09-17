@@ -27,26 +27,6 @@ export default function HomePage() {
         //saveProfile(new Profile("davi","davi@email.com","54321"))
     };
 
-    const handleLogIn = (profile) => {
-
-        let account = retrieveAccount(profile.email);
-        if (!account)
-        {
-            console.log("essa conta não existe");
-            return false;
-        }
-        if (account.senha === profile.senha)
-        {
-            console.log("thanks for login in, " + profile.email)
-            return true;
-        }
-        else
-        {
-            console.log("senha incorreta");
-            return false;
-        }
-
-    };
 
     return (
         <>
@@ -60,12 +40,24 @@ export default function HomePage() {
                 <PopUpElement Trigger={currentWindow !== "none"} onClick={() => setCurrentWindow("none")}>
                     {currentWindow === "login" && (
                         <ExistingProfileLogin
-                            email = {savedAccouts[auxAccount.current].email}
+                            email = {savedAccouts[auxAccount.current]?.email}
                             onCancel={() => setCurrentWindow("none")}
-                            onLogIn={handleLogIn}
                         />
                     )}
 
+                    {currentWindow === "options" && (
+                        <AddProfile
+                            onExisting={() =>{auxAccount.current = -1; setCurrentWindow("login")}}
+                            onNew = {() =>{setCurrentWindow("signin")}}
+                            onCancel={() => setCurrentWindow("none")}
+                        />
+                    )}
+
+                    {currentWindow === "signin" && (
+                        <NewProfileForm
+                            onCancel={() => setCurrentWindow("none")}
+                        />
+                    )}
 
                 </PopUpElement>
 
