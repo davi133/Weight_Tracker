@@ -7,7 +7,7 @@ import AddProfile from "./AddProfile";
 import { useRef, useState } from "react";
 import PopUpElement from "../PopUpElement";
 import "../model/Profiles";
-import Profile, { retrieveAccount, saveProfile } from "../model/Profiles";
+import Profile from "../model/Profiles";
 
 export default function HomePage() {
     /*const [ExistingOpen,setExistingOpen] = useState(false);
