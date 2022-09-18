@@ -1,11 +1,12 @@
 
 export default function ProfileCard(props)
 {
-    const {...other} = props;
+
+    
 
     return (
-        <div className="profileCardBody" {...other}>
-            a
+        <div className="profileCardBody" onClick = {props.onClick}>
+            {props.profile?props.profile.name:"sem nome"}
         </div>
 
 

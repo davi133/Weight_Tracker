@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 import PopUpElement from "../PopUpElement";
 import "../model/Profiles";
 import Profile from "../model/Profiles";
+import {retrieveAllCahcedProfiles, retrieveCachedProfileByEmail } from "./CachedProfiles";
 
 export default function HomePage() {
     /*const [ExistingOpen,setExistingOpen] = useState(false);
@@ -17,14 +18,11 @@ export default function HomePage() {
 
     const [currentWindow, setCurrentWindow] = useState("none"); //none//login//login_add//signin//options
 
-    var savedAccouts = [
-        new Profile("davi", "davi@email.com"),
-        new Profile("pedro", "pedro@email.com"),
-    ];
+    var savedAccouts = retrieveAllCahcedProfiles();
     var auxAccount = useRef(-1);
 
     const teste = () => {
-        //saveProfile(new Profile("davi","davi@email.com","54321"))
+        console.log(savedAccouts);
     };
 
 
@@ -32,9 +30,17 @@ export default function HomePage() {
         <>
             <div className="pseudoBody">
                 <div className="profilesPlate">
-                    <ProfileCard onClick={() => {auxAccount.current = 0; console.log('logando em "davi"');setCurrentWindow("login"); }} />
-                    <ProfileCard onClick={() => {auxAccount.current = 1; console.log('logando em "pedro"'); setCurrentWindow("login");}} />
+                    {
+                        savedAccouts.map((element,index) => {
+                            console.log(element);
+                            return <ProfileCard key={index} profile = {element} 
+                            onClick = {()=>{auxAccount.current=index;setCurrentWindow("login")}}/>
+    
+                        })
+                    }
+                    
                     <NewProfile onClick={() => { setCurrentWindow("options"); }} />
+                    <NewProfile onClick={teste} />
                 </div>
 
                 <PopUpElement Trigger={currentWindow !== "none"} onClick={() => setCurrentWindow("none")}>

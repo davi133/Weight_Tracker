@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import Profile,{retrieveAccount} from "../model/Profiles"
+import { CacheProfile } from "./CachedProfiles";
 
 export default function ProfileLogIn(props) {
     var withEmail =  props.email!==undefined && props.email.length!==0;
@@ -26,6 +27,7 @@ export default function ProfileLogIn(props) {
         if (account.senha === profile.senha)
         {
             setWarningMsg("thanks for login in, " + profile.email)
+            CacheProfile(account);
             onClose();
             return true;
         }

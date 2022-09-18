@@ -21,6 +21,7 @@ export function retrieveAllAccounts()
     
 }
 
+
 export function retrieveAccount(email)
 {
     var lista = retrieveAllAccounts();

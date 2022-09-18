@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Profile, { saveProfile, retrieveAccount } from "../model/Profiles";
-import PopUpElement from "../PopUpElement";
+import { CacheProfile } from "./CachedProfiles";
 
 export default function NewProfileForm(props) {
     const [inputs, setInputs] = useState({});
@@ -22,7 +22,9 @@ export default function NewProfileForm(props) {
             setWarningMsg("já existe uma conta com esse email");
         }
         else {
-            saveProfile(new Profile(inputs.name, inputs.email, inputs.senha));
+            let prof = new Profile(inputs.name, inputs.email, inputs.senha);
+            saveProfile(prof);
+            CacheProfile(prof);
             setWarningMsg("conta criada");
             onClose();
         }
