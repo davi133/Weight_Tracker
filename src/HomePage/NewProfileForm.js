@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Profile, { saveProfile, retrieveAccount } from "../model/Profiles";
 import { CacheProfile } from "./CachedProfiles";
+import { useNavigate } from "react-router-dom";
 
 export default function NewProfileForm(props) {
     const [inputs, setInputs] = useState({});
     const [warningMsg,setWarningMsg] = useState("");
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -26,6 +28,7 @@ export default function NewProfileForm(props) {
             saveProfile(prof);
             CacheProfile(prof);
             setWarningMsg("conta criada");
+            navigate("/app")
             onClose();
         }
 

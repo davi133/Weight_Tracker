@@ -7,14 +7,11 @@ import AddProfile from "./AddProfile";
 import { useRef, useState } from "react";
 import PopUpElement from "../PopUpElement";
 import "../model/Profiles";
-import Profile from "../model/Profiles";
-import {retrieveAllCahcedProfiles, retrieveCachedProfileByEmail } from "./CachedProfiles";
+import {retrieveAllCahcedProfiles} from "./CachedProfiles";
+import { useNavigate } from "react-router-dom";
 
-export default function HomePage() {
-    /*const [ExistingOpen,setExistingOpen] = useState(false);
-      const [Existing2Open,setExisting2Open] = useState(false);
-      const [NewOpen,setNewOpen] = useState(false);
-      const [isAddProfile,setIsAddProfile] = useState(false);*/
+export default function HomePage(props) {
+    const navigate = useNavigate();
 
     const [currentWindow, setCurrentWindow] = useState("none"); //none//login//login_add//signin//options
 
@@ -22,7 +19,7 @@ export default function HomePage() {
     var auxAccount = useRef(-1);
 
     const teste = () => {
-        console.log(savedAccouts);
+        return navigate("/app");
     };
 
 
@@ -67,28 +64,6 @@ export default function HomePage() {
 
                 </PopUpElement>
 
-                {/* 
-                <ExistingProfileLogin Trigger={ExistingOpen}
-                onCancel = {()=>{setExistingOpen(false)}}
-                onLogIn = {handleLogIn}
-                />
-
-                <ExistingProfileLogin Trigger={Existing2Open}
-                email = {"outro email"}
-                onCancel = {()=>{setExisting2Open(false)}}
-                onLogIn = {handleLogIn}
-                />
-                
-
-                <NewProfileForm Trigger={NewOpen}
-                onCancel = {()=>{setNewOpen(false)}
-                }
-                />
-                <AddProfile  Trigger={isAddProfile}
-                onCancel = {()=>{setIsAddProfile(false)}}
-                />
-
-                */}
             </div>
         </>
     );

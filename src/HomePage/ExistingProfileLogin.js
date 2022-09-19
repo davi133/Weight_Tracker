@@ -2,11 +2,13 @@
 import { useState } from "react";
 import Profile,{retrieveAccount} from "../model/Profiles"
 import { CacheProfile } from "./CachedProfiles";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileLogIn(props) {
     var withEmail =  props.email!==undefined && props.email.length!==0;
     const [inputs, setInputs] = useState({email: withEmail?props.email:""});
     const [warningMsg,setWarningMsg] = useState("");
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -28,6 +30,7 @@ export default function ProfileLogIn(props) {
         {
             setWarningMsg("thanks for login in, " + profile.email)
             CacheProfile(account);
+            navigate("/app")
             onClose();
             return true;
         }
