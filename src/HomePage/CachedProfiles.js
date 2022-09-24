@@ -21,7 +21,11 @@ export function retrieveCachedProfileByEmail(email) {
 }
 
 export function CacheProfile(profile) {
+
+    profile.senha = "";
     var lista = retrieveAllCahcedProfiles();
+    
+    //checando se estava na lista. Se estava na lista então só precisa atualizar os valores
     let wasInList = false;
     lista.forEach((element, index, theArray) => {
         if (element.email === profile.email) {
