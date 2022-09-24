@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Profile, { saveProfile, retrieveAccount } from "../model/Profiles";
 import { CacheProfile } from "./CachedProfiles";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
+import $ from "jquery";
 
 export default function NewProfileForm(props) {
     const [inputs, setInputs] = useState({});
@@ -18,18 +19,49 @@ export default function NewProfileForm(props) {
         event.preventDefault();
 
         if (inputs.senha !== inputs.senha2) {
+            //senha não confirmada
             setWarningMsg("confirme sua senha");
         }
+        /*
+        ===# RESPONSABILIDADE DO BACK END #===
         else if (retrieveAccount(inputs.email)) {
+            //conta já existente
             setWarningMsg("já existe uma conta com esse email");
         }
+        ===# ############################ #===*/
         else {
-            let prof = new Profile(inputs.name, inputs.email, inputs.senha);
-            saveProfile(prof);
-            CacheProfile(prof);
-            setWarningMsg("conta criada");
-            navigate("/app")
-            onClose();
+            //conta criada com sucesso
+            let profile = new Profile(inputs.name, inputs.email, inputs.senha);
+            //saveProfile(prof);
+            
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8080/weightTrackerBack/cadastrarUsuario.php",
+                data: profile,
+                success(response) {
+                    console.log("server response is: ");
+                    let data = {}
+                    //let data = JSON.parse(response);
+                    console.log(response);
+                    if (!data.sucesso)
+                    {
+                        setWarningMsg(data.message);
+                    } 
+                    else
+                    {
+                        CacheProfile(profile);
+                        navigate("/app");
+                    }
+
+
+                },
+            });
+            
+            
+            
+            
+            //navigate("/app")
+            //onClose();
         }
 
 

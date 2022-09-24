@@ -4,14 +4,14 @@ import newPrpfileIcon from "./NewProfile.png";
 import NewProfileForm from "./NewProfileForm";
 import ExistingProfileLogin from "./ExistingProfileLogin";
 import AddProfile from "./AddProfile";
-import { useRef, useState } from "react";
+import { useRef, useState} from "react";
 import PopUpElement from "../PopUpElement";
 import "../model/Profiles";
 import {retrieveAllCahcedProfiles} from "./CachedProfiles";
-import { useNavigate } from "react-router-dom";
+import $ from "jquery";
 
 export default function HomePage(props) {
-    const navigate = useNavigate();
+
 
     const [currentWindow, setCurrentWindow] = useState("none"); //none//login//login_add//signin//options
 
@@ -19,9 +19,15 @@ export default function HomePage(props) {
     var auxAccount = useRef(-1);
 
     const teste = () => {
-        return navigate("/app");
+        GETPHP();
     };
 
+   
+    const GETPHP =(e)=>
+    {  //por alguma razão, só funciona com AJAX do jquery
+       
+    }
+    
 
     return (
         <>
@@ -29,7 +35,7 @@ export default function HomePage(props) {
                 <div className="profilesPlate">
                     {
                         savedAccouts.map((element,index) => {
-                            console.log(element);
+                            //console.log(element);
                             return <ProfileCard key={index} profile = {element} 
                             onClick = {()=>{auxAccount.current=index;setCurrentWindow("login")}}/>
     
