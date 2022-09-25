@@ -31,11 +31,15 @@ export function CacheProfile(profile) {
         if (element.email === profile.email) {
             theArray[index] = profile;
             wasInList=true;
+            console.log("cached profile atualizado");
         }
     });
-    if (!wasInList) lista.push(profile);
+    if (!wasInList)
+    {
+        lista.push(profile);
+        console.log("profile [" + profile.email + "] cached")
+    } 
     localStorage.setItem("WT_cached", JSON.stringify(lista));
-    console.log("profile [" + profile.email + "] cached")
 }
 
 export function UncacheProfile(profile) {
