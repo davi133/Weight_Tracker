@@ -1,11 +1,14 @@
 import "./HomePage.css";
-import ProfileCard from "./ProfileCard";
-import newPrpfileIcon from "./NewProfile.png";
-import NewProfileForm from "./NewProfileForm";
-import ExistingProfileLogin from "./ExistingProfileLogin";
-import { useRef, useState} from "react";
-import PopUpElement from "../PopUpElement";
 import "../model/Profiles";
+import newPrpfileIcon from "./NewProfile.png";
+import PopUpElement from "../PopUpElement";
+
+import SignInForm from "./SignInForm";
+import LoginForm from "./LoginForm";
+
+import { useRef, useState} from "react";
+
+
 import {retrieveAllCahcedProfiles} from "../Data/CachedProfiles";
 
 export default function HomePage(props) {
@@ -40,7 +43,7 @@ export default function HomePage(props) {
 
                 <PopUpElement Trigger={currentWindow !== "none"} onClick={() => setCurrentWindow("none")}>
                     {currentWindow === "login" && (
-                        <ExistingProfileLogin
+                        <LoginForm
                             email = {cachedAccouts[auxAccount.current]?.email}
                             onCancel={() => setCurrentWindow("none")}
                         />
@@ -55,7 +58,7 @@ export default function HomePage(props) {
                     )}
 
                     {currentWindow === "signin" && (
-                        <NewProfileForm
+                        <SignInForm
                             onCancel={() => setCurrentWindow("none")}
                         />
                     )}
@@ -93,3 +96,15 @@ function AddProfileOptions(props)
 
     );
 }
+
+function ProfileCard(props)
+{
+    return (
+        <div className="profileCardBody" onClick = {props.onClick}>
+            {props.profile?props.profile.name:"sem nome"}
+        </div>
+
+
+    );
+}
+

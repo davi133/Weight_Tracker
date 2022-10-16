@@ -4,7 +4,13 @@ import Profile from "../model/Profiles"
 import { CacheProfile } from "../Data/CachedProfiles";
 import { useNavigate } from "react-router-dom";
 
-export default function ProfileLogIn(props) {
+
+/**
+ * Form to login
+ * @param String: email of the account logging in
+ * @param function: onCancel
+ */
+export default function LoginForm(props) {
     var withEmail =  props.email!==undefined && props.email.length!==0;
     const [inputs, setInputs] = useState({email: withEmail?props.email:""});
     const [warningMsg,setWarningMsg] = useState("");
@@ -39,22 +45,13 @@ export default function ProfileLogIn(props) {
             setWarningMsg("senha incorreta");
             return false;
         }
-
-
-
-
     }   
 
     const onClose = ()=>
     {
         props.onCancel();
         //in case you decide it should do something more on close
-        
     }
-
-    //console.log(withEmail);
-    //console.log(inputs);
-    //console.log(props.email)
 
     return (
             <div className="genericWindow" style={props.style}>
@@ -83,9 +80,7 @@ export default function ProfileLogIn(props) {
                             {warningMsg}
                         </div>
                     }
-
-                   
-                    
+           
                     <div>
                         <input type="submit" value="Entrar" />
                         <input type="button" value="Fechar" onClick={onClose}/>
