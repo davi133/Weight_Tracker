@@ -1,10 +1,17 @@
 import { useState } from "react";
-import Profile, { saveProfile, retrieveAccount } from "../model/Profiles";
-import { CacheProfile } from "./CachedProfiles";
-import { json, useNavigate } from "react-router-dom";
-import $ from "jquery";
+import Profile from "../model/Profiles";
+import { saveProfile } from "../Data/ProfileDB";
+import { CacheProfile } from "../Data/CachedProfiles";
+import { useNavigate } from "react-router-dom";
 
-export default function NewProfileForm(props) {
+
+/**
+ * Form to create a new account
+ * @param function: onCancel
+ */
+export default function SignInForm(props) {
+
+
     const [inputs, setInputs] = useState({});
     const [warningMsg,setWarningMsg] = useState("");
     const navigate = useNavigate();
@@ -15,53 +22,51 @@ export default function NewProfileForm(props) {
         setInputs(values => ({ ...values, [name]: value }))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (inputs.senha !== inputs.senha2) {
             //senha não confirmada
             setWarningMsg("confirme sua senha");
         }
-        /*
-        ===# RESPONSABILIDADE DO BACK END #===
-        else if (retrieveAccount(inputs.email)) {
-            //conta já existente
-            setWarningMsg("já existe uma conta com esse email");
-        }
-        ===# ############################ #===*/
         else {
-            //conta criada com sucesso
+            //mandar conta pro backEnd
             let profile = new Profile(inputs.name, inputs.email, inputs.senha);
-            //saveProfile(prof);
-            
-            $.ajax({
+            /*$.ajax({
                 type: "post",
                 url: "http://localhost:8080/weightTrackerBack/cadastrarUsuario.php",
                 data: profile,
                 success(response) {
                     console.log("server response is: ");
-                    let data = {}
-                    //let data = JSON.parse(response);
+                    let data = JSON.parse(response);
                     console.log(response);
-                    if (!data.sucesso)
+                    if (!data["sucesso"])
                     {
-                        setWarningMsg(data.message);
+                        setWarningMsg("deu erro:"+data.message);
                     } 
                     else
                     {
                         CacheProfile(profile);
+                        onClose();
                         navigate("/app");
                     }
 
 
                 },
-            });
-            
-            
-            
-            
-            //navigate("/app")
-            //onClose();
+            });*/
+            let response = await saveProfile(profile);
+            console.log(response);    
+            if (!response.sucesso)
+            {      
+                setWarningMsg("erro:"+response.message);   
+            } 
+            else
+            {
+                profile.id = response.insertedId;
+                CacheProfile(profile);
+                onClose();
+                navigate("/app");
+            }
         }
 
 

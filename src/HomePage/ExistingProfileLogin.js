@@ -1,7 +1,7 @@
 
 import { useState } from "react";
-import Profile,{retrieveAccount} from "../model/Profiles"
-import { CacheProfile } from "./CachedProfiles";
+import Profile from "../model/Profiles"
+import { CacheProfile } from "../Data/CachedProfiles";
 import { useNavigate } from "react-router-dom";
 
 export default function ProfileLogIn(props) {
@@ -20,7 +20,7 @@ export default function ProfileLogIn(props) {
         event.preventDefault();
 
         let profile = new Profile('a',inputs.email,inputs.password);
-        let account = retrieveAccount(profile.email);
+        let account = {};
         if (!account)
         {
             setWarningMsg("Essa conta não existe")
@@ -67,7 +67,7 @@ export default function ProfileLogIn(props) {
                         <br></br>
                         <input type="email"  name="email" value={            
                             inputs.email || ""}
-                        onChange={handleChange} 
+                        onChange={handleChange}
                         placeholder="exemplo@email.com" required disabled={withEmail} />
                     </label>
 

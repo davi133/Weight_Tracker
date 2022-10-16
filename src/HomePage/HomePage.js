@@ -3,38 +3,30 @@ import ProfileCard from "./ProfileCard";
 import newPrpfileIcon from "./NewProfile.png";
 import NewProfileForm from "./NewProfileForm";
 import ExistingProfileLogin from "./ExistingProfileLogin";
-import AddProfile from "./AddProfile";
 import { useRef, useState} from "react";
 import PopUpElement from "../PopUpElement";
 import "../model/Profiles";
-import {retrieveAllCahcedProfiles} from "./CachedProfiles";
-import $ from "jquery";
+import {retrieveAllCahcedProfiles} from "../Data/CachedProfiles";
 
 export default function HomePage(props) {
 
 
     const [currentWindow, setCurrentWindow] = useState("none"); //none//login//login_add//signin//options
-
-    var savedAccouts = retrieveAllCahcedProfiles();
+    
+    var cachedAccouts = retrieveAllCahcedProfiles();
     var auxAccount = useRef(-1);
 
     const teste = () => {
-        GETPHP();
+        //GETPHP();
     };
 
-   
-    const GETPHP =(e)=>
-    {  //por alguma razão, só funciona com AJAX do jquery
-       
-    }
-    
 
     return (
         <>
             <div className="pseudoBody">
                 <div className="profilesPlate">
                     {
-                        savedAccouts.map((element,index) => {
+                        cachedAccouts.map((element,index) => {
                             //console.log(element);
                             return <ProfileCard key={index} profile = {element} 
                             onClick = {()=>{auxAccount.current=index;setCurrentWindow("login")}}/>
@@ -42,20 +34,20 @@ export default function HomePage(props) {
                         })
                     }
                     
-                    <NewProfile onClick={() => { setCurrentWindow("options"); }} />
-                    <NewProfile onClick={teste} />
+                    <NewProfileOption onClick={() => { setCurrentWindow("options"); }} />
+                    <NewProfileOption onClick={teste} />
                 </div>
 
                 <PopUpElement Trigger={currentWindow !== "none"} onClick={() => setCurrentWindow("none")}>
                     {currentWindow === "login" && (
                         <ExistingProfileLogin
-                            email = {savedAccouts[auxAccount.current]?.email}
+                            email = {cachedAccouts[auxAccount.current]?.email}
                             onCancel={() => setCurrentWindow("none")}
                         />
                     )}
 
                     {currentWindow === "options" && (
-                        <AddProfile
+                        <AddProfileOptions
                             onExisting={() =>{auxAccount.current = -1; setCurrentWindow("login")}}
                             onNew = {() =>{setCurrentWindow("signin")}}
                             onCancel={() => setCurrentWindow("none")}
@@ -75,7 +67,7 @@ export default function HomePage(props) {
     );
 }
 
-function NewProfile(props) {
+function NewProfileOption(props) {
     return (
         <div onClick={props.onClick}>
             <img
@@ -84,5 +76,20 @@ function NewProfile(props) {
                 className="profileCardBody"
             ></img>
         </div>
+    );
+}
+
+function AddProfileOptions(props)
+{
+    return (
+
+            <div className="genericWindow choiceWindow">
+
+                <button onClick={()=>props.onExisting()}>Perfil Existente</button>
+                <button onClick={()=>props.onNew()}>Novo Perfil</button>
+                <button onClick={()=>props.onCancel()}>Voltar</button>
+
+            </div>
+
     );
 }

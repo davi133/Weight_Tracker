@@ -1,25 +1,7 @@
 
-export function retrieveAllCahcedProfiles() {
-    var lista = localStorage.getItem("WT_cached") || "[]";
-    return JSON.parse(lista);
-}
 
-export function retrieveCachedProfileByIndex(index) {
-    var lista = retrieveAllCahcedProfiles();
-    return lista[index];
-}
-
-export function retrieveCachedProfileByEmail(email) {
-    var lista = retrieveAllCahcedProfiles();
-    for (let i = 0; i < lista.length; i++) {
-        if (lista[i].email === email) {
-            return lista[i];
-        }
-    }
-    return undefined;
-
-}
-
+/**[C r U d]
+ */
 export function CacheProfile(profile) {
 
     profile.senha = "";
@@ -42,6 +24,36 @@ export function CacheProfile(profile) {
     localStorage.setItem("WT_cached", JSON.stringify(lista));
 }
 
+
+/**[c R u d]
+ */
+export function retrieveAllCahcedProfiles() {
+    var lista = localStorage.getItem("WT_cached") || "[]";
+    return JSON.parse(lista);
+}
+
+/**[c R u d]
+ */
+export function retrieveCachedProfileByIndex(index) {
+    var lista = retrieveAllCahcedProfiles();
+    return lista[index];
+}
+
+/**[c R u d]
+ */
+export function retrieveCachedProfileByEmail(email) {
+    var lista = retrieveAllCahcedProfiles();
+    for (let i = 0; i < lista.length; i++) {
+        if (lista[i].email === email) {
+            return lista[i];
+        }
+    }
+    return undefined;
+
+}
+
+/**[c r u D]
+ */
 export function UncacheProfile(profile) {
     var lista = retrieveAllCahcedProfiles();
     lista.forEach((element, index, theArray) => {
@@ -53,6 +65,8 @@ export function UncacheProfile(profile) {
     console.log("profile [" + profile.email + "] uncached")
 }
 
+/**[c r u D]
+ */
 export function UncacheProfilebyIndex(index) {
     var lista = retrieveAllCahcedProfiles();
     delete lista[index];
@@ -60,10 +74,10 @@ export function UncacheProfilebyIndex(index) {
     console.log("profile [" + index + "] uncached")
 }
 
-
+/**[c r u DDDDDDD]
+ */
 export function UncacheAllProfiles() {
     localStorage.removeItem("WT_cached");
     console.log("cache apagado");
 }
-
 window.uncacheAllProfiles = UncacheAllProfiles;
