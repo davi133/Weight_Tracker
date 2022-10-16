@@ -32,33 +32,10 @@ export default function SignInForm(props) {
         else {
             //mandar conta pro backEnd
             let profile = new Profile(inputs.name, inputs.email, inputs.senha);
-            /*$.ajax({
-                type: "post",
-                url: "http://localhost:8080/weightTrackerBack/cadastrarUsuario.php",
-                data: profile,
-                success(response) {
-                    console.log("server response is: ");
-                    let data = JSON.parse(response);
-                    console.log(response);
-                    if (!data["sucesso"])
-                    {
-                        setWarningMsg("deu erro:"+data.message);
-                    } 
-                    else
-                    {
-                        CacheProfile(profile);
-                        onClose();
-                        navigate("/app");
-                    }
-
-
-                },
-            });*/
             let response = await saveProfile(profile);
-            console.log(response);    
             if (!response.sucesso)
             {      
-                setWarningMsg("erro:"+response.message);   
+                setWarningMsg("Erro: "+response.message);   
             } 
             else
             {

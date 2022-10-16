@@ -7,6 +7,7 @@ import $ from "jquery";
  * Saves a profile (from model/Profile.js) in the DB.
  * 
  * If there is already an existing profile with the same email it will reaturn an error
+ * @param Profile: the profile to save
  */
 export async function saveProfile(profile)
 {
@@ -20,9 +21,19 @@ export async function saveProfile(profile)
             res = JSON.parse(response);
         },
     });
+    console.log(res);
     return res;
     
   
+}
+
+/**
+ * [c R u d]
+ */
+export function validateLogin(email)
+{//TODO
+    //var lista = retrieveAllAccounts();
+    //return lista[email];
 }
 
 
