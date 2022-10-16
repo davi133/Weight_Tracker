@@ -1,18 +1,18 @@
 
 import { useState } from "react";
-import Profile from "../model/Profiles"
 import { CacheProfile } from "../Data/CachedProfiles";
 import { useNavigate } from "react-router-dom";
+import { validateLogin } from "../Data/ProfileDB";
 
 
 /**
  * Form to login
- * @param String: email of the account logging in
+ * @param profile: profile to log in
  * @param function: onCancel
  */
 export default function LoginForm(props) {
-    var withEmail =  props.email!==undefined && props.email.length!==0;
-    const [inputs, setInputs] = useState({email: withEmail?props.email:""});
+    var withEmail =  props.profile.email!==undefined && props.profile.email.length!==0;
+    const [inputs, setInputs] = useState({email: withEmail?props.profile.email:""});
     const [warningMsg,setWarningMsg] = useState("");
     const navigate = useNavigate();
 
@@ -22,29 +22,23 @@ export default function LoginForm(props) {
         setInputs(values => ({ ...values, [name]: value }))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        let profile = new Profile('a',inputs.email,inputs.password);
-        let account = {};
-        if (!account)
-        {
-            setWarningMsg("Essa conta não existe")
-            return false;
-        }
-        if (account.senha === profile.senha)
-        {
-            setWarningMsg("thanks for login in, " + profile.email)
-            CacheProfile(account);
-            navigate("/app")
-            onClose();
-            return true;
-        }
+        let profile = props.profile;
+        profile.senha = inputs.password;
+        let response = await validateLogin(profile.email, profile.senha);
+        if (!response.sucesso)
+        {      
+            setWarningMsg("Erro: "+response.message);   
+        } 
         else
         {
-            setWarningMsg("senha incorreta");
-            return false;
+            CacheProfile(profile);
+            onClose();
+            navigate("/app");
         }
+
     }   
 
     const onClose = ()=>

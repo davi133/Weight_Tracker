@@ -8,6 +8,15 @@ import $ from "jquery";
  * 
  * If there is already an existing profile with the same email it will reaturn an error
  * @param Profile: the profile to save
+ * 
+ * @return obj{   
+ *   sucesso: bool
+ * 
+ *   message: string
+ * 
+ *   insertedId: int
+ * 
+ * }
  */
 export async function saveProfile(profile)
 {
@@ -21,7 +30,7 @@ export async function saveProfile(profile)
             res = JSON.parse(response);
         },
     });
-    console.log(res);
+    //console.log(res);
     return res;
     
   
@@ -29,11 +38,38 @@ export async function saveProfile(profile)
 
 /**
  * [c R u d]
+ * 
+ * Validates the Login
+ * 
+ * @param email
+ * @param password
+ * 
+ * @return obj{   
+ *   sucesso: bool
+ * 
+ *   message: string
+ * 
+ *   userId: int
+ * 
+ * }
  */
-export function validateLogin(email)
-{//TODO
-    //var lista = retrieveAllAccounts();
-    //return lista[email];
+export async function validateLogin(email,password)
+{
+    let res = {};
+    await $.ajax({
+        async:false,
+        type: "post",
+        url: "http://localhost:8080/weightTrackerBack/validateLogin.php",
+        data: {
+            email:email,
+            senha:password
+        },
+        success(response) {          
+            res = JSON.parse(response);
+        },
+    });
+    //console.log(res);
+    return res;
 }
 
 

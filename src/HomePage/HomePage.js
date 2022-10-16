@@ -44,7 +44,7 @@ export default function HomePage(props) {
                 <PopUpElement Trigger={currentWindow !== "none"} onClick={() => setCurrentWindow("none")}>
                     {currentWindow === "login" && (
                         <LoginForm
-                            email = {cachedAccouts[auxAccount.current]?.email}
+                            profile = {cachedAccouts[auxAccount.current]}
                             onCancel={() => setCurrentWindow("none")}
                         />
                     )}
