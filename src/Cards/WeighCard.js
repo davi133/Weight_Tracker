@@ -38,7 +38,7 @@ export default function WeightCard(props) {
 
     return (
         <div className="weightCard">
-            {esse_id}
+
             <div className=" infoDisplay">
                 {props.info?.weight} Kg
             </div>
