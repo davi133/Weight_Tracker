@@ -36,8 +36,8 @@ export async function saveProfile(profile)
   
 }
 
-/**
- * [c R u d]
+/**[c R u d]
+ * 
  * 
  * Validates the Login
  * 
@@ -86,7 +86,7 @@ export function retrieveAccountByEmail(email)
  * [c R u d]
  */
 export function retrieveAccountByID(id)
-{//TODO
+{//TODO 
     //var lista = retrieveAllAccounts();
     //return lista[id];
 }
@@ -96,17 +96,8 @@ export function retrieveAccountByID(id)
  */
 export async function removeAccount(profile)
 {
+    //TODO ?????
     console.log("it is currently impossible to remove an account")
 }
 
 
-/**
- * [c r u DDDDDD]
- */
-export function removeAllAccounts()
-{
-    //localStorage.removeItem("WT_profiles");
-    console.log("contas apagadas");
-}
-
-window.removeAllAccounts = removeAllAccounts;

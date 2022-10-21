@@ -1,0 +1,23 @@
+.appBody
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 93vh;
+}
+
+.recordsList
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    outline: 1px solid black;
+    width: 550px;
+    height: 500px;
+}
+
+.recordsList > *
+{
+    margin-top: 20px;
+
+}

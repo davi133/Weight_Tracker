@@ -117,6 +117,7 @@
 
 .btnSave
 {
+    cursor: pointer;
     background-color: hsl(124, 100%, 35%);
 }
 .btnSave:hover
@@ -130,6 +131,7 @@
 
 .btnDelete
 {
+    cursor: pointer;
     background-color: hsl(0, 100%, 50%);
 }
 .btnDelete:hover
