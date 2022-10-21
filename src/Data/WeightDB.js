@@ -10,6 +10,7 @@ var WeightDB = {
 var listeners =[]
 function notifyListeners()
 {
+    //console.log("notifying listeners");
     listeners.forEach((element)=>{element()})
 }
 
@@ -44,7 +45,7 @@ export async function saveWeight(weightr)
     lista.push(weightr);
     lista.sort(compareWeightDate);
 
-    console.log("weight [" + weightr.weight + "] saved")
+    console.log("weight [" + weightr.id + "] saved")
     
     localStorage.setItem("WT_lastID", weightr.id)
     localStorage.setItem("WT_weights", JSON.stringify(lista));
@@ -55,12 +56,14 @@ export async function saveWeight(weightr)
 export async function deleteWeight(weightr)
 {
     var lista = await retrieveAllWeights("");
+    let index_to_remove =-1
     lista.forEach((element, index, theArray) => {
         if (element.id === weightr.id) {
-            delete theArray[index];
+            index_to_remove = index;
         }
     });
-    localStorage.setItem("WT_weights", JSON.stringify(lista));
+    lista.splice(index_to_remove,1);
+    localStorage.setItem("WT_weights", JSON.stringify( lista));
     console.log("weightr [" + weightr.weight + "] deleted")
     notifyListeners();
 }

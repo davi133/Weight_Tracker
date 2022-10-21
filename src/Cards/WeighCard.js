@@ -8,11 +8,14 @@ import 'font-awesome/css/font-awesome.min.css';
 /**
  * Card to display a weightRegister
  * @param info: a WeightReg object
+ * @param onEdit: function to run on save
+ * @param onDelete: function to run on delete
  */
 export default function WeightCard(props) {
     const [dropDown, setDropDown] = useState(false);
 
   
+    //console.log(props.info.id);
     const EditEvent = ()=>
     {
         console.log("editar");
@@ -27,12 +30,15 @@ export default function WeightCard(props) {
         console.log("excluir");
         if (props.onDelete!== undefined)
         {
-            props.onDelete();
+            props.onDelete(props.info);
         }
     }
 
+    let esse_id = props.info? props.info.id:-1;
+
     return (
         <div className="weightCard">
+            {esse_id}
             <div className=" infoDisplay">
                 {props.info?.weight} Kg
             </div>

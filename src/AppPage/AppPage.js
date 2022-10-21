@@ -1,46 +1,59 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import WeightCard from "../Cards/WeighCard";
 import WeightCardCreator from "../Cards/WeightCardCreator";
-import WeightReg from "../model/WeightReg";
+//import WeightReg from "../model/WeightReg";
 import WeightDB from "../Data/WeightDB"
 import "./App.css";
 
 export default function AppPage(props) {
 
-    const [a, setA] = useState(0);
-    //var s = [];
-    var listOfWeight = useRef();
+    const [listOfWeight, setListOfWeight] = useState([])
 
 
     useEffect(() => {
         WeightDB.retrieveAllWeights("a").then((data) => {
-            listOfWeight.current = data;
-            setA(1);
+            setListOfWeight(data)
+            /*WeightDB.listenToChanges(async function up(){
+                setListOfWeight(await retrieveAllWeights(""))
+            });*/
         })
-    }, []
+    }, [listOfWeight]
     );
 
-
-    const saveWeight = async (data) => {
-        await WeightDB.saveWeight(data)
+    const saveWeight =(data) => {
+        WeightDB.saveWeight(data);
 
     }
 
+    const deleteWeight =async  (data)=>{
+        await WeightDB.deleteWeight(data);
+        //listOfWeight +=[1];
+
+    }
+
+
+    /**
+     * this function is only for debug
+     */
     const test = () => {
         console.log("teste");
     }
 
     return (
         <div className="appBody">
+            
             <button onClick={test}> teste</button>
             <div className="recordsList">
                 {
-                   
-                   
-                   listOfWeight.current != undefined && listOfWeight.current.map( (element, index)=>{
-                    return <WeightCard info = {element} key = {index}/>
-                   }
-                   )
+
+
+                    listOfWeight !== undefined && listOfWeight.map((element, index) => {
+                        return <WeightCard info={element} key={index} 
+                        onDelete ={deleteWeight}
+
+                        />
+                    }
+                    )
                 }
                 <WeightCardCreator
                     onSave={saveWeight}
