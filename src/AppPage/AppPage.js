@@ -1,32 +1,46 @@
 import React, { useEffect, useState } from "react";
 import WeightCard from "../Cards/WeighCard";
 import WeightCardCreator from "../Cards/WeightCardCreator";
+import AddWeightButton from "../Cards/AddWeightButton";
 //import WeightReg from "../model/WeightReg";
 import WeightDB from "../Data/WeightDB"
 import "./App.css";
+import WeightReg from "../model/WeightReg";
 
+//página principal do aplicativo, aquela que você cria os weight cards
 export default function AppPage(props) {
 
+    
     const [listOfWeight, setListOfWeight] = useState([])
-
+    //dicionario id=>bool que se decide se renderiza o card ou o editor
+    const [renderEditList, updateRenderEditList] = useState({})
 
     useEffect(() => {
         WeightDB.retrieveAllWeights("a").then((data) => {
-            setListOfWeight(data)
-            /*WeightDB.listenToChanges(async function up(){
-                setListOfWeight(await retrieveAllWeights(""))
-            });*/
+            setListOfWeight(data);
+            let newRenderList ={};
+            listOfWeight.forEach((item)=>{
+                newRenderList = {...newRenderList,[item.id]:false}
+            })
+            updateRenderEditList({...newRenderList,"last":false});
         })
-    }, [listOfWeight]
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []
     );
 
-    const saveWeight =(data) => {
-        WeightDB.saveWeight(data);
+    const saveWeight = (data) => {
+        updateRenderEditList({...renderEditList,"last":false})
+        WeightDB.saveWeight(data)
+            .then(() =>WeightDB.retrieveAllWeights("a"))
+            .then((data)=>setListOfWeight(data))
+
 
     }
 
-    const deleteWeight =async  (data)=>{
-        await WeightDB.deleteWeight(data);
+    const deleteWeight = (data) => {
+        WeightDB.deleteWeight(data)
+        .then(() =>WeightDB.retrieveAllWeights("a"))
+            .then((data)=>setListOfWeight(data))
         //listOfWeight +=[1];
 
     }
@@ -48,16 +62,34 @@ export default function AppPage(props) {
 
 
                     listOfWeight !== undefined && listOfWeight.map((element, index) => {
-                        return <WeightCard info={element} key={index} 
-                        onDelete ={deleteWeight}
 
-                        />
+                        if (!renderEditList[element.id]) {
+                            let _elem = WeightReg(element.weight,element.year,element.month,element.day)
+                            return <WeightCard info={_elem} key={index}
+                                onDelete={deleteWeight}
+
+                            />
+                        }
+                        else {
+                            return <WeightCardCreator info={element} key={index} />
+                        }
                     }
                     )
+
+
+                } 
+                
+                {
+                    !renderEditList["last"] ?
+                        <AddWeightButton
+                            onClick={() => {
+                                updateRenderEditList({ ...renderEditList, "last": true })
+                            }} /> :
+                        <WeightCardCreator
+                            onSave={saveWeight}
+                        />
                 }
-                <WeightCardCreator
-                    onSave={saveWeight}
-                />
+
 
             </div>
 
@@ -65,3 +97,4 @@ export default function AppPage(props) {
 
     );
 }
+

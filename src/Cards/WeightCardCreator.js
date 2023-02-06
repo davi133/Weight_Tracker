@@ -9,27 +9,31 @@ import WeightReg from "../model/WeightReg";
  */
 export default function WeighCardCreator(props) {
 
-    const [weight, setWeight] = useState(props.info ? props.info.weight : 0);
+    const [weight, setWeight] = useState(props.info ? props.info.weight : "0");
     const [date, setDate] = useState(props.info ? props.info.date : new Date().toLocaleDateString("en-CA"));
     const weightInput = useRef();
     const dateInput = useRef();
 
-    const SaveEvent = ()=>
-    {
-        let wr = WeightReg(weight,date)
+    const SaveEvent = () => {
+
+        let weightNumber = parseFloat(weight.replace(",", "."))
         
-        if (props.onSave!== undefined)
-        {
-            console.log("salvar");
+        var dateObj = dateInput.current.valueAsDate
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+        
+        let wr = WeightReg(weightNumber, year,month,day)
+        //console.log("confirmando a data: "+day +"/"+month +"/"+year)
+        
+        if (props.onSave !== undefined) {
             props.onSave(wr);
         }
     }
 
-    const DeleteEvent = ()=>
-    {
+    const DeleteEvent = () => {
         console.log("excluir");
-        if (props.onDelete!== undefined)
-        {
+        if (props.onDelete !== undefined) {
             props.onDelete();
         }
     }
@@ -37,12 +41,15 @@ export default function WeighCardCreator(props) {
 
     return (
         <div className="weightCard">
-            
+
             <div className="infoDisplay"
-            onClick={()=>{weightInput.current.focus()}}>
+                onClick={() => { weightInput.current.focus() }}>
                 <input className="weightInputDisplay" type="text" ref={weightInput}
                     value={weight}
-                    onChange={event => setWeight((event.target.value).replace(/[^\d.,-]/g, ''))}
+                    onChange={event => {
+                        setWeight((event.target.value).replace(/[^\d.,-]/g, ''));
+
+                    }}
                 ></input>Kg
             </div>
             {/*<input className="infoInput" type="text"
@@ -51,19 +58,22 @@ export default function WeighCardCreator(props) {
             ></input>*/}
 
             <div className="infoDisplay"
-                 onClick={()=>{dateInput.current.showPicker()}}>
-            <input type="date" className=" dateInputDisplay"
-                    ref = {dateInput}
+                onClick={() => { dateInput.current.showPicker() }}>
+                <input type="date" className=" dateInputDisplay"
+                    ref={dateInput}
                     value={date}
-                    onChange={(event) => {setDate(event.target.value)}}
-            ></input>
+                    onChange={(event) => {
+                        setDate(event.target.value);
+                        
+                    }}
+                ></input>
             </div>
 
             <div className="infoDisplay">
                 <button className="btnDisplay btnSave" onClick={SaveEvent}>SALVAR</button>
-            </div> 
+            </div>
             <div className="infoDisplay">
-                <button className="btnDisplay btnDelete" onClick={DeleteEvent}>APAGAR</button>
+                <button className="btnDisplay btnDelete" onClick={DeleteEvent}>CANCELAR</button>
             </div>
 
 

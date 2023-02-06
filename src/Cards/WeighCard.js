@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./WeightCard.css";
-import icon_edit from "./icon_more_options1.png"
+//import icon_edit from "./icon_more_options1.png"
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import 'font-awesome/css/font-awesome.min.css';
+import WeightReg from "../model/WeightReg";
 
 /**
  * Card to display a weightRegister
@@ -18,23 +19,33 @@ export default function WeightCard(props) {
     //console.log(props.info.id);
     const EditEvent = ()=>
     {
-        console.log("editar");
+        console.log("editar")
         if (props.onEdit!== undefined)
         {
-            props.onEdit();
+            props.onEdit()
         }
     }
 
     const DeleteEvent = ()=>
     {
-        console.log("excluir");
+        console.log("excluir")
         if (props.onDelete!== undefined)
         {
             props.onDelete(props.info);
         }
     }
 
-    let esse_id = props.info? props.info.id:-1;
+    let display_date="data"
+    //let esse_id = props.info? props.info.id:-1;
+    if (props.info?.date !== undefined)
+    {
+        display_date = props.info?.date()
+    }
+    else
+    {
+        let wr = WeightReg(0,props.info?.year,props.info?.month,props.info?.day)
+        display_date =wr.date()
+    }
 
     return (
         <div className="weightCard">
@@ -43,7 +54,7 @@ export default function WeightCard(props) {
                 {props.info?.weight} Kg
             </div>
             <div className="infoDisplay">
-                {props.info?.date}
+                {display_date}
             </div>
 
             <div className="dropdown" onMouseLeave={()=>{setDropDown(false)}} >

@@ -114,6 +114,23 @@
     color: whitesmoke;
 }
 
+.iconBtnDisplay
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 100%;
+    width:55px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.faIcon
+{
+    width: 35px;
+    height: 35px;
+}
 
 .btnSave
 {

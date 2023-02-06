@@ -1,41 +1,43 @@
-export default function WeightReg(weight, date, perfil=null,id=-1)
+//import { type } from "@testing-library/user-event/dist/type";
+"use strict"
+
+export default function WeightReg(weight,year,month,day, perfil=null,id=-1)
 {
     var weightCard=
     {
         id:id,
         perfil:perfil,
         weight:weight,
-        date:yyyymmdd(date),
+        year:year,
+        month:month,//1-12
+        day:day,
+        date: function() {
+            //in case you are wondering, this .padStart is to make the number display with at least 2 digits
+            return String(this.day).padStart(2, '0') + "/" + String(this.month).padStart(2, '0')+"/"+this.year;
+        }
+
     };
+    
+    
     return weightCard;
 }
 
 
 
-function yyyymmdd(date) {
-    
-    if (date instanceof String)
+export class WeightRegs
+{
+    constructor(weight,year,month,day)
     {
-        return date
+        this.weight=weight
+        this.year=year
+        this.month=month
+        this.day=day
     }
 
-    if (!(date instanceof Date && !isNaN(date)))
-    {
-        date = new Date();
+    date_string()
+    { //in case you are wondering, this .padStart is to make the number display with at least 2 digits
+        return String(this.day).padStart(2, '0') + "/" + String(this.month).padStart(2, '0')+"/"+this.year
     }
 
-    //https://stackoverflow.com/a/63490548/18241587
-    return date.toLocaleDateString('en-CA'); // 2020-08-19 (year-month-day) notice the different locale
-    /*var mm = date.getMonth() + 1; // getMonth() is zero-based
-    var dd = date.getDate();
-  
-    var full= [date.getFullYear(),
-            (mm>9 ? '' : '0') + mm,
-            (dd>9 ? '' : '0') + dd
-           ].join('-');
-    
-    return full*/
-    
-};
 
-
+}

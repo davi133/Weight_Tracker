@@ -29,6 +29,13 @@ export async function saveProfile(profile)
         success(response) {          
             res = JSON.parse(response);
         },
+        error(jqXHR,textStatus,errorThrown)
+        {
+            res ={
+                sucesso: false,
+                message: "unable to connect with the back end"
+            }
+        }
     });
     //console.log(res);
     return res;
@@ -56,7 +63,7 @@ export async function saveProfile(profile)
 export async function validateLogin(email,password)
 {
     let res = {};
-    await $.ajax({
+    $.ajax({
         async:false,
         type: "post",
         url: "http://localhost:8080/weightTrackerBack/validateLogin.php",
@@ -67,6 +74,13 @@ export async function validateLogin(email,password)
         success(response) {          
             res = JSON.parse(response);
         },
+        error(jqXHR,textStatus,errorThrown)
+        {
+            res ={
+                sucesso: false,
+                message: "unable to connect with the back end"
+            }
+        }
     });
     //console.log(res);
     return res;
@@ -86,7 +100,7 @@ export function retrieveAccountByEmail(email)
  * [c R u d]
  */
 export function retrieveAccountByID(id)
-{//TODO 
+{//TODO ?? maybe not
     //var lista = retrieveAllAccounts();
     //return lista[id];
 }
